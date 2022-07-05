@@ -9,16 +9,10 @@ export default function Feedback() {
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
-  const handleGoodBtn = () => {
-    setGood(good + 1);
-  };
-
-  const handleNeutralBtn = () => {
-    setNeutral(neutral + 1);
-  };
-
-  const handleBadBtn = () => {
-    setBad(bad + 1);
+  const handleBtnClick = setType => {
+    return setType(state => {
+      return state + 1;
+    });
   };
 
   const countTotalFeedback = () => {
@@ -33,9 +27,18 @@ export default function Feedback() {
   return (
     <div>
       <Section title="Please leave feedback">
-        <FeedbackOptions options="Good" onLeaveFeedback={handleGoodBtn} />
-        <FeedbackOptions options="Neutral" onLeaveFeedback={handleNeutralBtn} />
-        <FeedbackOptions options="Bad" onLeaveFeedback={handleBadBtn} />
+        <FeedbackOptions
+          options="Good"
+          onLeaveFeedback={() => handleBtnClick(setGood)}
+        />
+        <FeedbackOptions
+          options="Neutral"
+          onLeaveFeedback={() => handleBtnClick(setNeutral)}
+        />
+        <FeedbackOptions
+          options="Bad"
+          onLeaveFeedback={() => handleBtnClick(setBad)}
+        />
       </Section>
 
       <Section title="Statistics">
